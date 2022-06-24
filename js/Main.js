@@ -8,3 +8,5 @@ let numero = prompt("Ingresame un número");
     }else{
         alert("INGRESA UN NUMEROOOOOOO");
     }
+
+  

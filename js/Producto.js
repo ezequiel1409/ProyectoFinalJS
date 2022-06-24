@@ -35,9 +35,16 @@ class Producto{
     }
     
 }
-let prueba = new Producto();
-while(confirm("Desea cargar un producto?")){
-    prueba.añadirProducto();
-    console.log(prueba.getIva());
-    prueba.listarProductos();
-}
+// let prueba = new Producto();
+// while(confirm("Desea cargar un producto?")){
+//     prueba.añadirProducto();
+//     console.log(prueba.getIva());
+//     prueba.listarProductos();
+// }
+let cursor = document.getElementById("carritoCompras");
+cursor.addEventListener('mouseenter', function(){
+    // parent.style.background = 'blue';
+    console.log(cursor)
+    cursor.className += "fa-beat";
+
+});

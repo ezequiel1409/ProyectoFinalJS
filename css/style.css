@@ -6,3 +6,17 @@
 #carritoCompras {
   background-color: transparent;
   border: 0; }
+
+.dropdown-toggle::after {
+  display: none !important; }
+
+.cardIMGTop {
+  display: flex;
+  justify-content: center; }
+  .cardIMGTop .imgTop {
+    width: 75%; }
+
+.cardCarrito .cardTitulo {
+  margin-top: 0.5rem; }
+  .cardCarrito .cardTitulo h3 {
+    padding: 0.25rem; }

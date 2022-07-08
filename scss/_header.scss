@@ -9,3 +9,6 @@
     background-color: transparent;
     border: 0;
 }
+.dropdown-toggle::after {
+    display: none !important;
+}

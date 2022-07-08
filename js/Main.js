@@ -1,12 +1,5 @@
-let numero = prompt("Ingresame un número");
-// console.log("hola, estoy adentro");
-    if(numero != null && !numero == ""){
-        alert("Tu numero ingresado es " + numero);
-        for(let index = 0; index < numero; index++){
-            console.log("Hola" + index);
-        }
-    }else{
-        alert("INGRESA UN NUMEROOOOOOO");
-    }
-
-  
+let producto = new Producto();
+producto.cargarProducto(000, "RASCADOR CIRCULAR CON RATON MOVIBLE Y PELOTA", 3, 1500, "./images/rascadorCircular.jpeg");
+producto.cargarProducto(001, "BOZAL de SILICONA", 2, 1300, "./images/bozalDeSilicona.png");
+producto.cargarProducto(002, "Dispenser Lavanda", 10, 500, "./images/dispenserLavanda.jpeg");
+producto.insertarProductosEnElDom(productos);

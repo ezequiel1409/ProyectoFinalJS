@@ -1,20 +1,23 @@
 productos = [];
+carritoDeProductos = [];
 class Producto{
     idProducto;
     nombreProducto;
-    cantidadProducto;
+    cantidadProductoAComprar;
+    stockProducto;
     costoProducto;
     imagen;
     
     Producto(idProducto, nombreProducto, cantidadProducto, costoProducto,imagen){
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto.toUpperCase();
-        this.cantidadProducto = cantidadProducto;
+        this.cantidadProductoAComprar = cantidadProductoAComprar;
+        this.stockProducto = stockProducto;
         this.costoProducto = costoProducto.parseFloat(costoProducto);
         this.imagen = imagen;
         }
-    cargarProducto(idProducto, nombreProducto, cantidadProducto, costoProducto, imagen){
-        productos.push({"idProducto": idProducto, "nombreProducto": nombreProducto, "cantidadProducto":cantidadProducto, "costoProducto":costoProducto, "imagen": imagen});
+    cargarProducto(idProducto, nombreProducto, cantidadProductoAComprar, stockProducto, costoProducto, imagen){
+        productos.push({"idProducto": idProducto, "nombreProducto": nombreProducto, "cantidadProductoAComprar":cantidadProductoAComprar,"stockProducto":stockProducto,  "costoProducto":costoProducto, "imagen": imagen});
 
             return productos;
         }
@@ -22,13 +25,14 @@ class Producto{
 
     insertarProductosEnElDom(productos ){
         let filaProductos =  document.getElementById('stockProductos');
+        let cantidadDeProductosEnElCarrito = document.getElementById('cantidadDeProductosEnElCarrito');
            for (const elemento of productos) {
 
                 let col = document.createElement('div');
-                col.classList.add('col-4');
+                col.classList.add('col-12', 'col-sm-12', 'col-md-4','mb-3');
                 
                 let card = document.createElement('div');
-                card.classList.add('card');
+                card.classList.add('card', 'p-2' );
 
                 let divIMG = document.createElement('div');
                 divIMG.classList.add('cardIMGTop');
@@ -53,10 +57,40 @@ class Producto{
                 let iconoBoton = document.createElement('i');
                 iconoBoton.classList.add('fa-solid', 'fa-plus');
                 boton.textContent = ' AÑADIR AL CARRITO ';
-
+                console.log(elemento.stockProducto);
                 boton.addEventListener("click", () => {
-                    console.log(boton)
-                    cargarProductoAlCarrito(); // Agregar producto y precio al carrito
+                    console.log("soy producto ciclando: " + elemento.cantidadProductoAComprar)
+                    if(!(elemento.cantidadProductoAComprar > elemento.stockProducto)){
+                    elemento.cantidadProductoAComprar++;
+                    cantidadDeProductosEnElCarrito.innerHTML =  elemento.cantidadProductoAComprar;
+                        Toastify({
+                            
+                                text: "¡Producto agregado con exito al carrito!",
+                                autoClose: 2000,
+                                gravity: "top", 
+                                close: "true",
+                                position: "right",
+                                style: {
+                                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                                  },
+                            onClick: function(){} // Callback after click
+                        }).showToast();
+                        cargarProductoAlCarrito(`${cardIMG.src} ${cardTitle.innerText} $${cardPrecio.innerText}`); 
+                    }else{
+                        Toastify({
+                            text: "No se puede agregar el producto, debido a que el stock que deseas adquirir, es superior al que actualmente tenemos!. Disculpa por las molestias!",
+                            autoClose: 2000,
+                            gravity: "bottom", 
+                            close: "true",
+                            position: "right",
+                            style: {
+                              background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            },
+                            onClick: function(){} // Callback after click
+                          }).showToast();
+    
+                    }   
+                   
                 });
         
                 filaProductos.appendChild(col);
@@ -75,24 +109,16 @@ class Producto{
         
             } 
         }
-        cargarProductoAlCarrito(datos){
-            console.log(productos)
-        }
-}    
-Toastify({
-    text: "This is a toast",
-    duration: 3000,
-    destination: "https://github.com/apvarun/toastify-js",
-    newWindow: true,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "left", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-      background: "linear-gradient(to right, #00b09b, #96c93d)",
-    },
-    onClick: function(){} // Callback after click
-  }).showToast();
+       
+}  
+function cargarProductoAlCarrito(producto){
+    carritoDeProductos.push(producto);
+    let listadoDeProductosEnElCarro = document.getElementById('carritoDeProductos');
+    for (const elemento of carritoDeProductos) {
+        console.log(elemento);
+    }
+}  
+
 
 
 

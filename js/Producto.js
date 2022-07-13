@@ -25,6 +25,9 @@ class Producto{
 
     insertarProductosEnElDom(productos ){
         let filaProductos =  document.getElementById('stockProductos');
+        let continuarCompra =  document.getElementsByClassName('continuarCompra');
+      
+
         let cantidadDeProductosEnElCarrito = document.getElementById('cantidadDeProductosEnElCarrito');
            for (const elemento of productos) {
 
@@ -59,6 +62,7 @@ class Producto{
                 boton.textContent = ' AÑADIR AL CARRITO ';
                 console.log(elemento.stockProducto);
                 boton.addEventListener("click", () => {
+                    // continuarCompra.classList.replace("btn btn_disabled", "btn btn_primary");
                     console.log("soy producto ciclando: " + elemento.cantidadProductoAComprar)
                     if(!(elemento.cantidadProductoAComprar > elemento.stockProducto)){
                     elemento.cantidadProductoAComprar++;
@@ -79,12 +83,12 @@ class Producto{
                     }else{
                         Toastify({
                             text: "No se puede agregar el producto, debido a que el stock que deseas adquirir, es superior al que actualmente tenemos!. Disculpa por las molestias!",
-                            autoClose: 2000,
+                            autoClose: 1000,
                             gravity: "bottom", 
                             close: "true",
                             position: "right",
                             style: {
-                              background: "linear-gradient(to right, #00b09b, #96c93d)",
+                              background: "#dc3545",
                             },
                             onClick: function(){} // Callback after click
                           }).showToast();
@@ -112,14 +116,45 @@ class Producto{
        
 }  
 function cargarProductoAlCarrito(producto){
-    carritoDeProductos.push(producto);
     let listadoDeProductosEnElCarro = document.getElementById('carritoDeProductos');
-    for (const elemento of carritoDeProductos) {
-        console.log(elemento);
-    }
+    let nuevoProd = document.createElement("li");
+    let cardIMG = document.createElement('div');
+    let divIMG = document.createElement('img');
+    let botonBorrar = document.createElement('button');
+        
+        carritoDeProductos.push(producto);
+    // console.log(producto)
+    divIMG.classList.add('cardIMGTop');
+    cardIMG.classList.add('img-thumbnail');
+    cardIMG.setAttribute('src', producto.src);
+
+    nuevoProd.classList.add("list-group-item", "text-right", "mx-2");
+    nuevoProd.textContent = producto;
+    nuevoProd.id = producto + "EnCarrito";
+
+    botonBorrar.classList.add('btn', 'btn-danger', 'mx-5');
+    botonBorrar.textContent = 'x';
+    botonBorrar.addEventListener("click", () => {
+        eliminarProductoCarro(carritoDeProductos)
+    });
+    
+    nuevoProd.appendChild(divIMG);
+    cardIMG.appendChild(divIMG);
+    nuevoProd.appendChild(botonBorrar);
+
+    listadoDeProductosEnElCarro.appendChild(nuevoProd);
+
+    cargarProductoAlCarritoEnLocalStorage(carritoDeProductos)
 }  
 
-
+function cargarProductoAlCarritoEnLocalStorage(productos){
+    if(productos.length > 0){
+        localStorage.setItem("productos", JSON.stringify(productos));
+    }
+}
+function eliminarProductoCarro(producto){
+    producto = producto.filter(productos => productos.id !== producto);
+}
 
 
 

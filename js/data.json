@@ -1,0 +1,24 @@
+[
+    {
+ "idProducto": "000",
+ "nombreProducto": "RASCADOR CIRCULAR CON RATON MOVIBLE Y PELOTA",
+ "stockProducto": 3,
+ "costoProducto":  1500,
+ "imagen": "./images/rascadorCircular.jpeg"
+    },
+    {
+ "idProducto": "001",
+ "nombreProducto": "BOZAL de SILICONA",
+ "stockProducto": 2,
+ "costoProducto":  1300,
+ "imagen": "./images/bozalDeSilicona.png"
+    },
+    {
+ "idProducto": "002",
+ "nombreProducto": "Dispenser Lavanda",
+ "stockProducto": 10,
+ "costoProducto":  500,
+ "imagen": "./images/dispenserLavanda.jpeg"
+    }
+    
+]

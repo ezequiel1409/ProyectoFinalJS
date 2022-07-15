@@ -26,12 +26,11 @@ class Producto{
     insertarProductosEnElDom(productos ){
         let filaProductos =  document.getElementById('stockProductos');
         let continuarCompra =  document.getElementsByClassName('continuarCompra');
+        let cantidadDeProductosEnElCarrito = document.getElementById('cantidadDeProductosEnElCarrito');
       
 
-        let cantidadDeProductosEnElCarrito = document.getElementById('cantidadDeProductosEnElCarrito');
-           for (const elemento of productos) {
-
-                let col = document.createElement('div');
+        productos.forEach(elemento => {
+            let col = document.createElement('div');
                 col.classList.add('col-12', 'col-sm-12', 'col-md-4','mb-3');
                 
                 let card = document.createElement('div');
@@ -111,9 +110,10 @@ class Producto{
                 card.appendChild(boton);
                 boton.appendChild(iconoBoton);
         
-            } 
+            });
+
+                
         }
-       
 }  
 function cargarProductoAlCarrito(producto){
     let listadoDeProductosEnElCarro = document.getElementById('carritoDeProductos');
@@ -155,6 +155,4 @@ function cargarProductoAlCarritoEnLocalStorage(productos){
 function eliminarProductoCarro(producto){
     producto = producto.filter(productos => productos.id !== producto);
 }
-
-
 
